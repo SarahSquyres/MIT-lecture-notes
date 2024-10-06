@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Intro2Algos</title>
+</head>
+
+<body>
+     <h1><a href="https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-1-algorithms-and-computation/"
+               target="_blank">Lecture 1: Introduction to Algorithms</a></h1>
+     <br>
+     <h2>What's an algorithm</h2>
+     <ul>
+          <li>Procedure that takes an input and produces a correct/valid output</li>
+     </ul>
+     <h2>Induction</h2>
+     <ul>
+          <li>Concept that involves using a base case and a recursive formula to solve a problem</li>
+          <li>Used in: functional programming, imperative programming, and logic programming</li>
+          <li>In a mathematical context: proving a statement is true for all positive integer</li>
+          <li>In programming:</li>
+          <ul>
+               <li>Base case</li>
+               <li>defining a base case that solves the problem for a specific input or set of inputs</li>
+               <li>Recursive formula</li>
+               <li>define a recursive formula that solves the problem for a larger input or set of inputs, based on the
+                    solution to the base case</li>
+          </ul>
+          <li>Steps of Induction in Programming</li>
+          <ol>
+               <li>Define the problem</li>
+               <ul>
+                    <li>identify a problem that can be solved using induction</li>
+                    <li>calculating the factorial of a number</li>
+                    <li>calculating the Fibonacci sequence</li>
+                    <li>solving recursive data structures: trees and graphs</li>
+               </ul>
+               <li>Define the base case</li>
+               <ul>
+                    <li>define a base case that solves the problem</li>
+                    <li>the factorial of 0 or 1</li>
+               </ul>
+               <li>Define the recursive formula</li>
+               <ul>
+                    <li>define a recursive formula that solves the problem for a larger input</li>
+                    <li>the factorial of n = n (times the factorial of n-1)</li>
+               </ul>
+               <li>Apply the recursive formula</li>
+               <ul>
+                    <li>Apply the recursive formula to solve the problem for larger inputs or sets of inputs</li>
+                    <li>see factorial.js</li>
+               </ul>
+          </ol>
+     </ul>
+     <h2>Birthday Problem</h2>
+     <ol>
+          <li>maintain a record (array storage or store in object)</li>
+          <li>interview each student to get their birthday data (recursive/iterate through elements)</li>
+          <ol>
+               <li>Check if birthday is in record</li>
+               <ul>
+                    <li>if is, return pair</li>
+               </ul>
+               <li>Add new student to record</li>
+          </ol>
+          <li>Else, return none</li>
+     </ol>
+     <ul>
+          <h2>Proof of Correctness</h2>
+          <li>inductive hypothesis</li>
+          <ul>
+               <li>if first "k" students contain match, return before interviewing student "k + 1"</li>
+          </ul>
+          <li>base case</li>
+          <ul>
+               <li>k = 0</li>
+               <li>assume inductive hypothesis true for k = k` (k prime)</li>
+               <ul>
+                    <li>if k` contains match, already returned by induction</li>
+                    <li>else if k` + 1 contains match</li>
+                    <li>algo checks k` + 1 against all students</li>
+               </ul>
+          </ul>
+          <h2>Proof of Efficiency</h2>
+          <li>how fast does it run compared to other possible solutions</li>
+          <li>dont measure time, instead count operations</li>
+          <li>expect performance to depend on size of input</li>
+          <li>Big O notation - upper bounds</li>
+          <li>&#x3A9; (omega) - lower bounds</li>
+          <li> &#x398; (theta) - upper and lower</li>
+          <li>linear time algorithm</li>
+          <ul>
+               <li>constant time: &#x398;(1)</li>
+               <ul>
+                    <li>performance of algorithm doesn't depend on input size</li>
+               </ul>
+               <li>logarithmic time: &#x398;(log n)</li>
+               <ul>
+                    <li>runtime increases very slowly as n grows (efficient)</li>
+               </ul>
+               <li>linear time: &#x398;(n)</li>
+               <ul>
+                    <li>execution time increases porportionally to size of input data</li>
+               </ul>
+               <li>loglinear time: &#x398;(n log n)</li>
+               <ul>
+                    <li>algorithm's time complexity grows proportionally to the input size (n) multiplied by the
+                         logarithm of that size (log n)</li>
+                    <li>as the input size increases, the operation count increases at a slower rate than a liner
+                         relationship but faster than a logarithmic one</li>
+               </ul>
+               <li>quadratic time: &#x398;(n^2)</li>
+               <ul>
+                    <li>runtime increases proportionally to the square of the input size</li>
+               </ul>
+               <li>polynomial time: &#x398;(n^c)</li>
+               <ul>
+                    <li>runtime increases at a rate proportional to the number of inputs</li>
+               </ul>
+               <li>exponential time: 2^&#x398;(n)</li>
+               <ul>
+                    <li>runtime increases significantly with each additional unit added to the input</li>
+               </ul>
+          </ul>
+     </ul>
+     <h2>Model of Computation</h2>
+     <ul>
+          <li>Word-RAM</li>
+          <ul>
+               <li>Random Access Memory: access different places in memory in constant time</li>
+               <li>think of RAM like a bunch of labeled boxes, each box can hold a small piece of data like a word or
+                    number</li>
+               <li>when the computer needs to use the data, it searches for the appropriate box</li>
+               <li>copies the data from the hard drive into the RAM so the CPU can use the data quickly and
+                    efficiently</li>
+               <li>address for each byte (8 bits) in memory</li>
+          </ul>
+     </ul>
+     <br>
+     <br>
+     <script src="./a-factorial.js"></script>
+</body>
+
+</html>
