@@ -8,11 +8,236 @@
 </head>
 
 <body>
-     <h1><a
-               href="https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-2-data-structures-and-dynamic-arrays/">Lecture
+     <h1><a href="https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-2-data-structures-and-dynamic-arrays/"
+               target="_blank">Lecture
                2: Data Structures and Dynamic Arrays</a></h1>
      <h2><a href="./a-introToAlgos.html">Back to Lecture 1</a></h2>
-
+     <h3>Interface (API/ADT) vs. Data Strucure</h3>
+     <ul>
+          <h4>Interface: what you want to do</h4>
+          <li>specification</li>
+          <li>what data can store</li>
+          <li>what operations are supported and what they mean</li>
+          <li>problem statement</li>
+     </ul>
+     <ul>
+          <h4>Data Structure: how you want to do it</h4>
+          <li>representation</li>
+          <li>how to store data</li>
+          <li>algorithms to support operations</li>
+          <li>solution</li>
+     </ul>
+     <ul>
+          <h4>Two main interfaces:</h4>
+          <li>set</li>
+          <li>sequence</li>
+     </ul>
+     <ul>
+          <h4>Two main DS approaches:</h4>
+          <li>arrays</li>
+          <li>pointer-based</li>
+     </ul>
+     <ul>
+          <h3>Static Sequence Interface</h3>
+          <li>number of items doesn't change but the items themselves may change</li>
+          <li>n items, x 0 to x n-1</li>
+          <ul>
+               <p>operations</p>
+               <li>build(x)</li>
+               <ul>
+                    <li>how you get started</li>
+                    <li>to build a data structure in this interface, call build(x)</li>
+                    <li>x: give some items, in some order, with a length</li>
+                    <li>make a new data structure (static sequence) of size n that has the items in the specified order
+                    </li>
+               </ul>
+               <li>len()</li>
+               <ul>
+                    <li>length method</li>
+                    <li>object oriented way of thinking of operations that your interface supports</li>
+                    <li>will return fixed value n</li>
+               </ul>
+               <li>iter_seq()</li>
+               <ul>
+                    <li>iteration sequence</li>
+                    <li>maintain order</li>
+                    <li>output x 0 to x n-1 in the specified sequence order that it was built in or changed to</li>
+                    <li>iterates through all items, linear time O(n) to output</li>
+               </ul>
+               <li>get</li>
+               <ul>
+                    <li>dynamically access anywhere in the middle of the sequence</li>
+                    <li>get the i-th item x[i] given the value of i</li>
+                    <li></li>
+               </ul>
+               <li>set</li>
+               <ul>
+                    <li>change x[i] to a given new item</li>
+               </ul>
+          </ul>
+          <h4>Array/List: natural solution to static sequence interface problem</h4>
+          <ul>
+               <li>static array (no static arrays in python or js)</li>
+               <li>relates to model of computation</li>
+               <ul>
+                    <li>key: word RAM</li>
+                    <li>memory is an array of w-bit words</li>
+                    <li>memory is divided into words</li>
+                    <li>words are w-bits long</li>
+                    <img src="/Algos and Computation/assets/w-bit visual.PNG" alt="W-Bit Visual">
+                    <li>can access array randomly (RAM-random access memory)</li>
+               </ul>
+               <li>consecutive chunk of memory</li>
+               <ul>
+                    <li>if i want to access the array[i], same thing as accessing memory[address(array) + i]</li>
+                    <li>address: where array starts</li>
+                    <li>array access is constant, O(1), time</li>
+                    <li>side effect of the assumption that array/memory access should take O(1) time</li>
+                    <ul>
+                         <li>assume w >= log n</li>
+                         <li>w is the machine word size (64 bit)</li>
+                         <li>word size must grow at least as fast as log n</li>
+                         <ul>
+                              <li>if i have n things in memory i need to be able to address them</li>
+                         </ul>
+                    </ul>
+               </ul>
+               <li>model of computation allows static array to solve static sequence interface problem in O(1) per
+                    get.at/set.at/len() operation</li>
+               <li>model of computation also allows O(n) time per build/iter_seq()</li>
+               <li>memory allocation model</li>
+               <ul>
+                    <li>how we create an array, further define build()</li>
+                    <li>allocate an array of size n in O(n) time</li>
+                    <li>side effect of this model is the amount of space used is, at most, the amount of time used</li>
+                    <ul>
+                         <li>space = &#x398;(time)</li>
+                    </ul>
+               </ul>
+          </ul>
+     </ul>
+     <ul>
+          <h3>Dynamic Sequence</h3>
+          <ul>
+               <li>static sequence plus...</li>
+               <li>insert_at(i, x)</li>
+               <ul>
+                    <li>insert and delete in the middle of sequence</li>
+               </ul>
+               <li>delete_at(i)</li>
+          </ul>
+          <h4>Linked List: natural solution to dynamic sequence interface problem</h4>
+          <ul>
+               <li>store items in nodes</li>
+               <li>each node has an item and a next field</li>
+               <ul>
+                    <li>class objects with two class variables (item and next pointer)</li>
+               </ul>
+               <li>assemble into a structure</li>
+               <li>store values in item fields</li>
+               <li>next pointers link nodes together and determine the sequence</li>
+               <li>pointers can be stored in a single word in a word-RAM model</li>
+               <li>keep track of the head of the list</li>
+               <ul>
+                    <li>data structure represented by head, length</li>
+               </ul>
+               <li>each node is stored in the array of computer memory</li>
+               <ul>
+                    <li>nodes are 2 words long</li>
+                    <li>each node is an array of size 2</li>
+                    <li>pointers are indicies to the giant computer memory array (the address of the array)</li>
+               </ul>
+               <li>easier to manipulate the order of a linked list</li>
+               <ul>
+                    <li>don't have to physically move nodes around</li>
+               </ul>
+          </ul>
+          <h4>Dynamic sequence operations</h4>
+          <ul>
+               <li>static array</li>
+               <ul>
+                    <li>if inserting at the beginning, will have to shift all items "down"</li>
+                    <ul>
+                         <li>indicies of all items will have to change</li>
+                    </ul>
+                    <li>A[i] = x i</li>
+                    <li>represents the assignmenbt of the value x i to the i-th element of the array, A. </li>
+                    <li>insert/delete_at() will cost &#x398;(n) time</li>
+                    <ul>
+                         <li>shifting</li>
+                         <li>cannot add elements to the end of a static array, hence static keyword</li>
+                         <li>would have to allocate a new array with more memory</li>
+                    </ul>
+                    <li>0(1) get_at/set_at</li>
+                    <li>fast at random access aspect because its an array</li>
+               </ul>
+               <li>linked-list</li>
+               <ul>
+                    <li>insertion and deletion at the front is efficient</li>
+                    <ul>
+                         <li>allocate a new node, insert_first(x)</li>
+                         <li>set next pointer to "old" first node</li>
+                         <li>change head pointer to point to "new" first node</li>
+                         <li>O(1) time</li>
+                    </ul>
+                    <li>accessing the i-th item is less efficient</li>
+                    <ul>
+                         <li>get/set will take order i time, &#x398;(i)</li>
+                         <ul>
+                              <li>worst case is &#x398;(n)</li>
+                         </ul>
+                         <li>have to follow pointers</li>
+                    </ul>
+                    <li>bad at random access</li>
+                    <li>better at being dynamic</li>
+                    <li>insertion/deletion at a particular position must "walk-through" to that position</li>
+                    <li>solve get_last efficiently in a linked list, solve in O(1) time</li>
+                    <ul>
+                         <li>store pointer to last element(tail) in the tail</li>
+                         <li>last is fast</li>
+                    </ul>
+               </ul>
+          </ul>
+     </ul>
+     <ul>
+          <h3>Dynamic Array (Python/JS)</h3>
+          <li>what happens in the Python interpreter</li>
+          <li>relax constraint of size(array) = n</li>
+          <li>enforce size of array</li>
+          <ul>
+               <li>at most &#x398;(n)</li>
+               <li>at least >= n</li>
+          </ul>
+          <li>maintain i-th item of the array represents x i</li>
+               <ul>
+                    <li>A[i] = x i</li>
+               </ul>
+          <li>add item to the end of the array</li>
+          <ul>
+               <li>A[len] = x, then len += 1</li>
+               <li>O(1) time</li>
+               <li>unless n = size</li>
+          </ul>
+          <li>store size and length of array (there may be empty spaces at the end)</li>
+          <li>n = interface size, number of items we want to store in array, interface</li>
+          <li>size = representation size, size of array, data structure</li>
+          <li>if n = size</li>
+          <ul>
+               <li>make array bigger</li>
+               <li>like static array</li>
+               <li>allocate new array of size bigger (2 * size)</li>
+               <li>allocation cost and copy cost</li>
+               <ul>
+                    <li>total resize cost &#x398;(n)</li>
+               </ul>
+          </ul>
+     </ul>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
 </body>
 
 </html>
